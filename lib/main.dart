@@ -40,7 +40,7 @@ class HomePage extends StatelessWidget {
                 if (user?.emailVerified ?? false) {
                   return const Text("Done");
                 } else {
-                  return const VeryfyEmailView();
+                  return const VerifyEmailView();
                 }
               // return const RegistarPage();
               // return const LoginView();
@@ -53,14 +53,14 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class VeryfyEmailView extends StatefulWidget {
-  const VeryfyEmailView({Key? key}) : super(key: key);
+class VerifyEmailView extends StatefulWidget {
+  const VerifyEmailView({Key? key}) : super(key: key);
 
   @override
-  State<VeryfyEmailView> createState() => _VeryfyEmailViewState();
+  State<VerifyEmailView> createState() => _VerifyEmailViewState();
 }
 
-class _VeryfyEmailViewState extends State<VeryfyEmailView> {
+class _VerifyEmailViewState extends State<VerifyEmailView> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
