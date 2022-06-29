@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/views/register_view.dart';
 import 'firebase_options.dart';
 import 'views/login_view.dart';
 
@@ -35,16 +36,42 @@ class HomePage extends StatelessWidget {
             switch (snapshot.connectionState) {
               case ConnectionState.done:
                 final user = FirebaseAuth.instance.currentUser;
+                // print(user);
                 if (user?.emailVerified ?? false) {
-                  print("Mail is verified");
+                  return const Text("Done");
                 } else {
-                  print("Sorry, you have to verifie your mail");
+                  return const VeryfiyEmailView();
                 }
-                return const Text("Done");
+              // return const LoginView();
+
               default:
                 return const Text("Loding...");
             }
           },
         ));
+  }
+}
+
+class VeryfiyEmailView extends StatefulWidget {
+  const VeryfiyEmailView({Key? key}) : super(key: key);
+
+  @override
+  State<VeryfiyEmailView> createState() => _VeryfiyEmailViewState();
+}
+
+class _VeryfiyEmailViewState extends State<VeryfiyEmailView> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      const Text("Please verify your email address"),
+      TextButton(
+        onPressed: () async {
+          final user = FirebaseAuth.instance.currentUser;
+          print(user);
+          await user?.sendEmailVerification();
+        },
+        child: const Text("Send email verification"),
+      )
+    ]);
   }
 }
