@@ -36,12 +36,13 @@ class HomePage extends StatelessWidget {
             switch (snapshot.connectionState) {
               case ConnectionState.done:
                 final user = FirebaseAuth.instance.currentUser;
-                // print(user);
+                print(user);
                 if (user?.emailVerified ?? false) {
                   return const Text("Done");
                 } else {
-                  return const VeryfiyEmailView();
+                  return const VeryfyEmailView();
                 }
+              // return const RegistarPage();
               // return const LoginView();
 
               default:
@@ -52,14 +53,14 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class VeryfiyEmailView extends StatefulWidget {
-  const VeryfiyEmailView({Key? key}) : super(key: key);
+class VeryfyEmailView extends StatefulWidget {
+  const VeryfyEmailView({Key? key}) : super(key: key);
 
   @override
-  State<VeryfiyEmailView> createState() => _VeryfiyEmailViewState();
+  State<VeryfyEmailView> createState() => _VeryfyEmailViewState();
 }
 
-class _VeryfiyEmailViewState extends State<VeryfiyEmailView> {
+class _VeryfyEmailViewState extends State<VeryfyEmailView> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -67,7 +68,7 @@ class _VeryfiyEmailViewState extends State<VeryfiyEmailView> {
       TextButton(
         onPressed: () async {
           final user = FirebaseAuth.instance.currentUser;
-          print(user);
+          // print(user);
           await user?.sendEmailVerification();
         },
         child: const Text("Send email verification"),
