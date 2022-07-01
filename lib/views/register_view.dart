@@ -1,7 +1,8 @@
-import 'package:firebase_core/firebase_core.dart';
+//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../firebase_options.dart';
+//import '../firebase_options.dart';
+import 'dart:developer' as devtools show log;
 
 class RegistarPage extends StatefulWidget {
   const RegistarPage({Key? key}) : super(key: key);
@@ -62,11 +63,11 @@ class _RegistarPageState extends State<RegistarPage> {
                 );
               } on FirebaseAuthException catch (e) {
                 if (e.code == "email-already-in-use") {
-                  print("Mail is registered");
+                  devtools.log("Mail is registered");
                 } else if (e.code == "weak-password") {
-                  print("Weak Password");
+                   devtools.log("Weak password");
                 } else if (e.code == "invalid-email") {
-                  print('Invalid Email');
+                devtools.log("Invalid email");
                 }
               }
             },
