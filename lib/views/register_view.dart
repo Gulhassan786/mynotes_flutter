@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 //import '../firebase_options.dart';
 import 'dart:developer' as devtools show log;
 
+import 'package:myapp/constants/routes.dart';
+
 class RegistarPage extends StatefulWidget {
   const RegistarPage({Key? key}) : super(key: key);
 
@@ -65,9 +67,9 @@ class _RegistarPageState extends State<RegistarPage> {
                 if (e.code == "email-already-in-use") {
                   devtools.log("Mail is registered");
                 } else if (e.code == "weak-password") {
-                   devtools.log("Weak password");
+                  devtools.log("Weak password");
                 } else if (e.code == "invalid-email") {
-                devtools.log("Invalid email");
+                  devtools.log("Invalid email");
                 }
               }
             },
@@ -76,7 +78,7 @@ class _RegistarPageState extends State<RegistarPage> {
           TextButton(
             onPressed: () {
               Navigator.of(context)
-                  .pushNamedAndRemoveUntil("/login/", (route) => false);
+                  .pushNamedAndRemoveUntil(loginRoute, (route) => false);
             },
             child: const Text("Already registered? Login here!"),
           ),
