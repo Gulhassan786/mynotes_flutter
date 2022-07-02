@@ -1,9 +1,5 @@
-//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import '../firebase_options.dart';
-import 'dart:developer' as devtools show log;
-
 import 'package:myapp/constants/routes.dart';
 import 'package:myapp/utilities/show_error_dialog.dart';
 
@@ -59,10 +55,14 @@ class _RegistarPageState extends State<RegistarPage> {
               final email = _email.text.trim();
               final password = _password.text.trim();
               try {
-                await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                final userCredentails =
+                    await FirebaseAuth.instance.createUserWithEmailAndPassword(
                   email: email,
                   password: password,
                 );
+                final user = FirebaseAuth.instance.currentUser;
+                await user?.sendEmailVerification();
+                Navigator.of(context).pushNamed(verifyEmailRoute);
               } on FirebaseAuthException catch (e) {
                 if (e.code == "email-already-in-use") {
                   await showErrorDialog(
